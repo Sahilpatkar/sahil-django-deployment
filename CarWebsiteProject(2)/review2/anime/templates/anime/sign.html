@@ -1,0 +1,95 @@
+  {% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+          <form class="form-inline my-2 my-lg-0">
+    <nav class="navbar navbar-fixed-top">
+      <div class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>                        
+      </button>
+      <a class="navbar-brand" href="{% url 'index' %}">AAC</a>
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav">
+        <li><a href="{% url 'index' %}">Home</a></li>
+        <li><a href="#">About</a></li>
+        <li class="active"><a href="{% url 'sign' %}">Feedback</a></li>
+        <li><a href="{% url 'carinfo' %}">Car Compare</a></li>
+      </ul>
+       <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+      {% if user.is_authenticated %}
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="{% url 'password_change' %}"><span class="glyphicon glyphicon-log-in"></span> Change Password</a></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="{% url 'logout' %}"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
+      </ul>
+      {% else %}
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="{% url 'login' %}"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="{% url 'register' %}"><span class="glyphicon glyphicon-log-in"></span> sign up</a></li>
+        {% endif %}
+      </ul>
+    </div>
+  </div>
+</div>
+</nav>
+<br>
+<br>
+<br>
+</form>
+
+    <title>website feedback</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="{% static 'anime/bootstrap.min.css' %}" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="{% static 'anime/sign.css' %}" rel="stylesheet">
+    <style>
+      body{
+        background-image: url('{% static "anime/bent2.JPG" %}');
+      }
+     </style>
+  </head>
+
+  <body>
+
+    <div class="container">
+      {% if user.is_authenticated %}
+      <form class="form-signin" method="POST" action="{% url 'sign' %}">
+        {% csrf_token %}
+        <h2 class="form-signin-heading"  style="color:white;">Write a feedback</h2>
+        <div class="form-group">
+          <label for="Name" class="sr-only">Name</label>
+          {{ form.name}}
+
+        </div>
+        
+        <div class="form-group">
+          <label for="Review" class="sr-only">Review:</label>
+            {{ form.review }}
+        </div>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">review</button>
+      </form>
+      {% else %}
+      <h4 align = "centre"><font color = "yellow">You are not logged in,please</font> <a href = "{% url 'login' %}">LOGIN </a><font color = "yellow">to continue</font></h4>
+      {% endif %}
+    </div> <!-- /container -->
+
+  </body>
+</html>

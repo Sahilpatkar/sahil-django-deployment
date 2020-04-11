@@ -1,0 +1,201 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>All About Cars</title>
+     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link href="{% static 'anime/CarC.css' %}" rel="stylesheet"> 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+    <!-- Bootstrap core CSS -->
+    <link href="{% static 'anime/bootstrap.min.css' %}" rel="stylesheet"> 
+    <!-- Bootstrap theme -->
+    <link href="{% static 'anime/bootstrap-theme.min.css' %}" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="{% static 'anime/theme.css' %}" rel="stylesheet">
+    
+    <style>
+      body{
+        background-image: url('{% static "anime/rolls.JPG" %}');
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+      }
+
+     </style> 
+
+     <style>
+      .btn-group button {
+      background-color: #4CAF50; /* Green background */
+      border: 1px solid green; /* Green border */
+      color: white; /* White text */
+      padding: 10px 24px; /* Some padding */
+      cursor: pointer; /* Pointer/hand icon */
+      float: left; /* Float the buttons side by side */
+      }
+
+      /* Clear floats (clearfix hack) */
+      .btn-group:after {
+      content: "";
+      clear: both;
+      display: table;
+      }
+
+      .btn-group button:not(:last-child) {
+      border-right: none; /* Prevent double borders */
+      }
+
+      /* Add a background color on hover */
+      .btn-group button:hover {
+      background-color: #3e8e41;
+      }
+    </style>
+    <style>
+    /* Add a gray background color and some padding to the footer */
+    footer {
+      background-color: #f2f2f2;
+      padding: 25px;
+    }
+
+    .carousel-inner img {
+      width: 100%; /* Set width to 100% */
+      min-height: 200px;
+    }
+
+    /* Hide the carousel text when the screen is less than 600 pixels wide */
+    @media (max-width: 600px) {
+      .carousel-caption {
+        display: none; 
+      }
+    }
+  </style>
+  </head>
+
+  <body bgcolor="red">
+      <form class="form-inline my-2 my-lg-0">
+        <nav class="navbar navbar-fixed-top">
+    <div class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>                        
+      </button>
+      <a class="navbar-brand" href="{% url 'index' %}">AAC</a>
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav">
+        <li><a href="{% url 'index' %}">Home</a></li>
+        <li><a href="#">About</a></li>
+        <li><a href="{% url 'sign' %}">Feedback</a></li>
+        <li class="active"><a href="{% url 'carinfo' %}">Car Compare</a></li>
+      </ul>
+       <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+      {% if user.is_authenticated %}
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="{% url 'password_change' %}"><span class="glyphicon glyphicon-log-in"></span> Change Password</a></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="{% url 'logout' %}"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
+      </ul>
+      {% else %}
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="{% url 'login' %}"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="{% url 'register' %}"><span class="glyphicon glyphicon-log-in"></span> sign up</a></li>
+        {% endif %}
+      </ul>
+    </div>
+  </div>
+</div>
+</nav>
+</form margin-down:20px;>
+
+<div class="form-group">
+<form method="POST" align="center">
+  <h1><font size="6" color="Yellow" >Select 2 cars to compare</font></h1>
+  {% csrf_token %}
+  <font size = "3" color = "black">{{form2.as_p}}</fornt>
+  <input type="submit" class="btn btn-primary" name="" value="submit">
+</form>
+</div>
+<br>
+
+
+<br>
+
+<div class="container" style="overflow-x:auto;">
+  <table class ="table table-hover" >
+    <thead>
+      <th><font size = "6" color = "black"><b>Car Name</b></font></th>
+      <th><font size = "5" color = "black">{{Car_Info.CarName}}</font></th>
+      <th><font size = "5" color = "black">{{Car_Info2.CarName}}</font></th>
+
+    </thead>
+    <tr>
+      <td><font size = "4" color = "black"><b>length</b></font></td>
+      <td><font size = "3" color = "black">{{Car_Info.length}}</font></td>
+      <td><font size = "3" color = "black">{{Car_Info2.length}}</font></td>
+    </tr>
+    <tr>
+      <td><font size = "4" color = "black"><b>widht</b></font></td>
+      <td><font size = "3" color = "black">{{Car_Info.widht}}</font></td>
+      <td><font size = "3" color = "black">{{Car_Info2.widht}}</font></td>
+    </tr>
+    <tr>
+      <td><font size = "4" color = "black"><b>height</b></font></td>
+      <td><font size = "3" color = "black">{{Car_Info.height}}</font></td>
+      <td><font size = "3" color = "black">{{Car_Info2.height}}</font></td>
+    </tr>
+    <tr>
+      <td><font size = "4" color = "black"><b>Wheel_base</b></font></td>
+      <td><font size = "3" color = "black">{{Car_Info.wheel_base}}</font></td>
+      <td><font size = "3" color = "black">{{Car_Info2.wheel_base}}</font></td>
+    </tr>
+    <tr>
+      <td><font size = "4" color = "black"><b>ground_clearance</b></font></td>
+      <td><font size = "3" color = "black">{{Car_Info.ground_clearance}}</font></td>
+      <td><font size = "3" color = "black">{{Car_Info2.ground_clearance}}</font></td>
+    </tr>
+    <tr>
+      <td><font size = "4" color = "black"><b>Boot_capacity</b></font></td>
+      <td><font size = "3" color = "black">{{Car_Info.Boot_capacity}}</font></td>
+      <td><font size = "3" color = "black">{{Car_Info2.Boot_capacity}}</font></td>
+    </tr>
+    <tr>
+      <td><font size = "4" color = "black"><b>Fule_type</b></font></td>
+      <td><font size = "3" color = "black">{{Car_Info.Fuel_type}}</font></td>
+      <td><font size = "3" color = "black">{{Car_Info2.Fuel_type}}</font></td>
+    </tr>
+    <tr>
+      <td><font size = "4" color = "black"><b>Engine_displacement</b></font></td>
+      <td><font size = "3" color = "black">{{Car_Info.Engine_displacement}}</font></td>
+      <td><font size = "3" color = "black">{{Car_Info2.Engine_displacement}}</font></td>
+    </tr>
+    <tr>
+      <td><font size = "4" color = "black"><b>Engine_type</b></font></td>
+      <td><font size = "3" color = "black">{{Car_Info.Engine_type}}</font></td>
+      <td><font size = "3" color = "black">{{Car_Info2.Engine_type}}</font></td>
+    </tr>
+    <tr>
+      <td><font size = "4" color = "black"><b>Max_power</b></font></td>
+      <td><font size = "3" color = "black">{{Car_Info.Max_power}}</font></td>
+      <td><font size = "3" color = "black">{{Car_Info2.Max_power}}</font></td>
+    </tr>
+  </table>
+
+</body>
+</html>
