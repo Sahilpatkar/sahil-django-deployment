@@ -11,7 +11,7 @@ class ReviewForm(forms.Form):
     review = forms.CharField(widget=forms.Textarea(attrs={'class' : 'form-control', 'placeholder' : 'Review'}))
 
 class FormName(forms.Form):
-	Car = Car_Info.objects.all()
+	Car = Car_Info.objects.order_by('CarName')
 
 	category = forms.ChoiceField(choices=[(i,i)for i in Car])
 

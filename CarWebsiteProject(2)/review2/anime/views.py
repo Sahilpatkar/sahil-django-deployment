@@ -53,8 +53,8 @@ def register(request):
 def car(request):
     form2 = FormName()
     
-    req_car = "NONE"
-    req_car2 = "NONE"
+    req_car = "-NONE-"
+    req_car2 = "-NONE-"
     
     if request.method == 'POST':
         form2 = FormName(request.POST)
